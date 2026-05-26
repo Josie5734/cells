@@ -56,8 +56,8 @@ end
 function _update()
 
 	--global inputs (can be done while paused or running)
-	if btnp(2) then update += 5 end --increase update time
-	if btnp(3) then update -= 5 end --decrease update time
+	if btnp(2) and update > 5 then update -= 5 end --increase update time
+	if btnp(3) and update < 60 then update += 5 end --decrease update time
 	if btnp(4) then --toggle automation
 		if running == false then --start automation if stopped
 			selexcg = 1 --send selexs to start
@@ -130,6 +130,14 @@ function _draw()
 	--text
 	centerprint("current generation",63,cgypos - 8,7)
 	centerprint("next generation",63,ngypos - 8,7)
+
+  print("cell ❎",3,25,7)
+  if running then 
+    print("🅾️ stop ",90,25,7)
+  else
+    print("🅾️ start ",90,25,7)
+  end
+  centerprint("⬆️⬇️ sim speed: " .. tostr(30/update) .. " p/s", 63,92,7)
 
 end
 
